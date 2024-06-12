@@ -1,17 +1,17 @@
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { GifState } from "../context/GifContext";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Gif from "../components/Gif";
 
 const Category = () => {
   const [searchResults, setSearchResults] = useState([]);
 
-  const {gf} = GifState();
+  const { gf } = GifState();
 
-  const {category} = useParams();
+  const { category } = useParams();
 
   const fetchSearchResults = async () => {
-    const {data} = await gf.gifs(category, category);
+    const { data } = await gf.gifs(category, category);
 
     setSearchResults(data);
   };
@@ -30,7 +30,6 @@ const Category = () => {
         <div className="w-full h-0.5 mt-6 bg-gray-800" />
       </div>
       <div>
-        
         <h2 className="text-4xl pb-1 font-extrabold capitalize">
           {category.split("-").join(" & ")} GIFs
         </h2>

@@ -1,8 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  HiEllipsisVertical,
-  HiMiniBars3BottomRight,
-} from "react-icons/hi2";
+import { HiEllipsisVertical, HiMiniBars3BottomRight } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { GifState } from "../context/GifContext";
 import GifSearch from "./GifSearch";
@@ -11,20 +8,13 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
 
-  const {filter, setFilter, favourites} = GifState();
+  const { filter, setFilter, favourites } = GifState();
 
   const fetchGifCategories = async () => {
     const res = await fetch("/categories.json");
-    const {data} = await res.json();
+    const { data } = await res.json();
     setCategories(data);
   };
-
-  // const { gf, favourites } = GifState();
-
-  // const fetchGifcategories = async () => {
-  //   const { data } = await gf.categories();
-  //   setCategories(data);
-  // };
 
   useEffect(() => {
     fetchGifCategories();
@@ -68,7 +58,6 @@ const Header = () => {
             </div>
           )}
 
-
           <button onClick={() => setShowCategories(!showCategories)}>
             <HiMiniBars3BottomRight className="text-sky-400 block lg:hidden size={30}" />
           </button>
@@ -78,12 +67,12 @@ const Header = () => {
         {showCategories && (
           <div className="absolute right-0 top-14 px-10 pt-6 pb-9 w-full gradient z-20">
             <span className="text-3xl font-extrabold">Categories</span>
-            <hr className="bg-gray-100 opacity-50 my-5"/>
+            <hr className="bg-gray-100 opacity-50 my-5" />
             <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               {categories.map((category) => {
                 return (
                   <Link
-                  onClick={() => setShowCategories(false)}
+                    onClick={() => setShowCategories(false)}
                     className="transition ease-in-out font-bold"
                     key={category.name}
                     to={`/${category.name_encoded}`}
@@ -96,7 +85,7 @@ const Header = () => {
           </div>
         )}
       </div>
-      <GifSearch filter={filter} setFilter={setFilter}/>
+      <GifSearch filter={filter} setFilter={setFilter} />
     </nav>
   );
 };

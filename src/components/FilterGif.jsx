@@ -1,6 +1,4 @@
-/* eslint-disable react/prop-types */
-
-import {HiMiniArrowTrendingUp} from "react-icons/hi2";
+import { HiMiniArrowTrendingUp } from "react-icons/hi2";
 import { GifState } from "../context/GifContext";
 
 const filters = [
@@ -22,8 +20,8 @@ const filters = [
   },
 ];
 
-const FilterGif = ({alignLeft = false, showTrending = false}) => {
-  const {filter, setFilter} = GifState();
+const FilterGif = ({ alignLeft = false, showTrending = false }) => {
+  const { filter, setFilter } = GifState();
 
   return (
     <div

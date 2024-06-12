@@ -8,21 +8,21 @@
 
 // export default Search
 
-import {useEffect, useState} from "react";
+import { useEffect, useState } from "react";
 import { GifState } from "../context/GifContext";
-import {useParams} from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Gif from "../components/Gif";
 import FilterGif from "../components/FilterGif";
 
 const Search = () => {
   const [searchResults, setSearchResults] = useState([]);
 
-  const {gf, filter} = GifState();
+  const { gf, filter } = GifState();
 
-  const {query} = useParams();
+  const { query } = useParams();
 
   const fetchSearchResults = async () => {
-    const {data} = await gf.search(query, {
+    const { data } = await gf.search(query, {
       sort: "relevant",
       lang: "en",
       type: filter,
