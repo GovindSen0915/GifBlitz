@@ -6,12 +6,13 @@ import {
 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
 import { GifState } from "../context/GifContext";
+import GifSearch from "./GifSearch";
 
 const Header = () => {
   const [categories, setCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
 
-  const { gf, filter, setFilter, favourites } = GifState();
+  const { gf, favourites } = GifState();
 
   const fetchGifcategories = async () => {
     const { data } = await gf.categories();
@@ -85,6 +86,7 @@ const Header = () => {
           </div>
         )}
       </div>
+      <GifSearch />
     </nav>
   );
 };
