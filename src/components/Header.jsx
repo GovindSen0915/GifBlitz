@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { HiEllipsisVertical } from 'react-icons/hi2'
 import { Link } from 'react-router-dom'
 
 const Header = () => {
@@ -17,6 +18,9 @@ const Header = () => {
             <Link className='px-4 py-1 hover:gradient border-b-4 hidden lg:block'>
             Reactions
             </Link>
+            <button>
+            <HiEllipsisVertical size={35} className='py-0.5 hover:gradient border-b-4 hidden lg:block'/>
+            </button>
         </div>
     </nav>
   )
