@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import {
   HiEllipsisVertical,
-  HiMiniBars3BottomLeft,
   HiMiniBars3BottomRight,
 } from "react-icons/hi2";
 import { Link } from "react-router-dom";
@@ -12,21 +11,29 @@ const Header = () => {
   const [categories, setCategories] = useState([]);
   const [showCategories, setShowCategories] = useState(false);
 
-  const { gf, favourites } = GifState();
+  const {filter, setFilter, favourites} = GifState();
 
-  const fetchGifcategories = async () => {
-    const { data } = await gf.categories();
+  const fetchGifCategories = async () => {
+    const res = await fetch("/categories.json");
+    const {data} = await res.json();
     setCategories(data);
   };
 
+  // const { gf, favourites } = GifState();
+
+  // const fetchGifcategories = async () => {
+  //   const { data } = await gf.categories();
+  //   setCategories(data);
+  // };
+
   useEffect(() => {
-    fetchGifcategories();
+    fetchGifCategories();
   }, []);
 
   return (
     <nav>
       <div className="relative flex gap-4 justify-between items-center mb-2">
-        <Link to="/" className="flex gap-2">
+        <Link to={"/"} className="flex gap-2">
           <img src="/logo.svg" className="w-8" alt="Giphy Logo" />
           <h1 className="text-5xl font-bold tracking-tight cursor-pointer">
             GIPHY
@@ -39,7 +46,7 @@ const Header = () => {
               <Link
                 key={category.name}
                 to={`/${category.name_encoded}`}
-                className="px-4 py-1 hover:gradient border-b-4 hidden lg:block"
+                className="px-4 py-1 hover:gradient transition ease-in-out border-b-4 hidden lg:block"
               >
                 {category.name}
               </Link>
@@ -49,9 +56,9 @@ const Header = () => {
           <button onClick={() => setShowCategories(!showCategories)}>
             <HiEllipsisVertical
               size={35}
-              className={`py-0.5 hover:gradient ${
+              className={`py-0.5 transition ease-in-out hover:gradient ${
                 showCategories ? "gradient" : ""
-              } border-b-4 hidden lg:block`}
+              } border-b-4 cursor-pointer hidden lg:block`}
             />
           </button>
 
@@ -60,7 +67,9 @@ const Header = () => {
               <Link to="/favourites">Favourite GIFs</Link>
             </div>
           )}
-          <button>
+
+
+          <button onClick={() => setShowCategories(!showCategories)}>
             <HiMiniBars3BottomRight className="text-sky-400 block lg:hidden size={30}" />
           </button>
           {/* </div>// */}
@@ -74,7 +83,8 @@ const Header = () => {
               {categories.map((category) => {
                 return (
                   <Link
-                    className="font-bold"
+                  onClick={() => setShowCategories(false)}
+                    className="transition ease-in-out font-bold"
                     key={category.name}
                     to={`/${category.name_encoded}`}
                   >
@@ -86,7 +96,7 @@ const Header = () => {
           </div>
         )}
       </div>
-      <GifSearch />
+      <GifSearch filter={filter} setFilter={setFilter}/>
     </nav>
   );
 };
