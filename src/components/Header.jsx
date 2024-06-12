@@ -67,9 +67,9 @@ const Header = () => {
 
         {showCategories && (
           <div className="absolute right-0 top-14 px-10 pt-6 pb-9 w-full gradient z-20">
-            <span>Categories</span>
-            <hr />
-            <div>
+            <span className="text-3xl font-extrabold">Categories</span>
+            <hr className="bg-gray-100 opacity-50 my-5"/>
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-4">
               {categories.map((category) => {
                 return (
                   <Link
